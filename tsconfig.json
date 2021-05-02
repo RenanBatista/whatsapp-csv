@@ -1,0 +1,68 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+
+    "noFallthroughCasesInSwitch": true,
+
+    "noUnusedParameters": true,
+
+    "noImplicitReturns": true,
+
+    "moduleResolution": "node",
+
+    "esModuleInterop": true,
+
+    "noUnusedLocals": true,
+
+    "noImplicitAny": true,
+
+    "target": "ESNext",
+
+    "module": "ESNext",
+
+    "strict": true,
+
+    "jsx": "react",
+
+    "baseUrl": "src",
+
+    "resolveJsonModule": true,
+
+    "sourceMap": true,
+
+    "skipLibCheck": true,
+
+    "allowJs": true,
+
+    "removeComments": true,
+
+    "paths": {
+      "components/*": ["components/*"],
+      "types/*": ["types/*"],
+      "services/*": ["services/*"],
+      "store/*": ["store/*"],
+      "util/*": ["util/*"],
+      "assets/": ["asset/*"]
+    },
+
+    "declaration": true,
+
+    "lib": ["es6", "dom"],
+
+    "noImplicitThis": true,
+
+    "suppressImplicitAnyIndexErrors": true,
+
+    "strictNullChecks": true,
+
+    "emitDeclarationOnly": true,
+
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
