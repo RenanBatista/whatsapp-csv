@@ -15,12 +15,15 @@
     "rules": {
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
-        "react/prop-types": "off"
+        "react/prop-types": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off"
     },
     "settings": {
         "react": {
             "pragma": "React",
             "version": "detect"
         }
-    }
+    },
+    "ignorePatterns": ["register.js","webpack.config.js"]
+
 }

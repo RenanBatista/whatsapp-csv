@@ -1,22 +1,4 @@
-//****************
-// Packages to install:
-//  npm install react --save
-//  npm install react-dom --save
-//  npm install webpack --save
-//  npm install webpack-dev-server --save
-//  npm install webpack-cli --save
-//  npm install babel-core --save-dev
-//  npm install babel-loader --save-dev
-//  npm install babel-preset-env --save-dev
-//  npm install babel-preset-react --save-dev
-//  npm install html-webpack-plugin --save-dev
-//  npm i babel-preset-typescript
-//  npm i --save-dev @types/react
-//  npm i --save-dev @types/react-dom
-//  npm install --save-dev typescript
-//  npm install --save-dev eslint eslint-plugin-react eslint-plugin-react-hooks @typescript-eslint/parser @typescript-eslint/eslint-plugin
-//  npm install file-loader --save-dev
-//****************
+
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
@@ -33,7 +15,7 @@ module.exports = {
   },
   resolve: {
     //Define as importações absolutas através do valor do paths no tsconfig.json
-    plugins: [new TsconfigPathsPlugin()], 
+    plugins: [new TsconfigPathsPlugin()],
     extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
     modules: [path.join(__dirname, "src"), "node_modules"],
   },
@@ -65,6 +47,10 @@ module.exports = {
             ],
           },
         },
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
