@@ -1,5 +1,5 @@
 export interface iMessage{
-    key: string;
+    key: number;
     date: string;
     hour: string;
     phone: string;

@@ -3,14 +3,14 @@ import Upload from 'components/upload/Upload';
 import React from 'react';
 import styled from 'styled-components';
 import { iMessage } from 'types/global.interface';
-import {
-  aggregateMessagesByField,
-  messages_in_date_range,
-  transformAgregateData,
-} from 'util/textToJson';
 import { Space } from 'antd';
 import DatePicker from 'components/datepicker/DatePicker';
 import moment from 'moment';
+import {
+  aggregateMessagesByField,
+  transformAgregateData,
+} from 'util/aggregate';
+import { messages_in_date_range } from 'util/parse';
 
 const Layout = styled.div`
   max-width: 900px;

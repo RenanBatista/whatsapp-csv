@@ -1,51 +1,55 @@
-import { iAgreggatedMessages, iMessage } from 'types/global.interface';
+import { iMessage } from 'types/global.interface';
 import { isFilled } from './parse';
 
-export const split_in_user_messages = (data: string):iMessage[] => {
-  //const separator = /(\d*\/\d*\/\d*\s*\d*\:\d*\s*\-(\s*.+?\:)?.+?(?=\d*\/\d*\/\d*\s*\d*\:\d*))/gms;
-  const separator = /(\d*\/\d*\/\d*\s*\d*\:\d*\s*\-(\s*.+?\:)\s*.+?(?=\d*\/\d*\/\d*\s*\d*\:\d*))/gms;
-
-  return data
-    .split(separator)
-    .map((line: string, index: string) =>
-      isFilled(whatsapp_to_table(index, line))
-    )
-    .filter((item): item is iMessage => item);
-};
-
-export const splitText = (data: string) => {
-  chat.push(...lines);
-};
-
-export const user_message_to_json = (key: string, line: string): iMessage => {
-  const regex = /(\d*\/\d*\/\d*)\s*(\d*\:\d*)\s*\-\s*(.+?)\:(.*$)/gms;
-
-  const message = {
-    key: key,
-    date: '',
-    hour: '',
-    phone: '',
-    body: '',
-    type: '',
-  };
-
-  line.replace(
-    regex,
-    (all: string, date: string, hour: string, phone: string, body: string) => {
-      message.date = date;
-      message.hour = hour;
-      message.phone = phone;
-      message.body = body;
-      message.type = checkBodyType(body);
-      return all;
-    }
+export const decode_text = (data: string): iMessage[] => {
+  //
+  const regex = /(\d*\/\d*\/\d*\s*\d*\:\d*\s*\-\s*.+?(?=\d*\/\d*\/\d*\s*\d*\:\d*))/gms;
+  console.log(
+    data.split(regex).map((line, index) => decode_message(line, index))
   );
-
-  return message;
+  return data
+    .split(regex)
+    .map((line, index) => decode_message(line, index))
+    .reduce((message): message is iMessage => isFilled(message) ? true : false);
 };
 
-export const checkBodyType = (message: string) => {
-  const match = message.match(/(?<=\.).*?(?=\(.+\))/gms);
+export const decode_message = (data: string, key: number): iMessage => {
+  const regex = /(\d*\/\d*\/\d*)\s*(\d*\:\d*)\s*\-\s*(.*)/gms;
+  const temp = data.split(regex);
 
-  return match ? match[0].trim() : 'texto';
+  console.log(data);
+  console.log(temp);
+
+  if (!data || !temp[1])
+    return { key: key, date: '', hour: '', phone: '', body: '', type: '' };
+
+  console.log(temp);
+  console.log('******************');
+  const body =
+    temp[3].split(':').length >= 2
+      ? temp[3].split(':').slice(1).join(' ')
+      : temp[2][0];
+
+  return {
+    key: key,
+    date: temp[1],
+    hour: temp[2],
+    phone: temp[3].split(':').length >= 2 ? temp[3].split(':')[0] : 'sistema',
+    body: body,
+    type: check_body_type(body),
+  };
+};
+
+export const check_body_type = (messageBody: string): string => {
+  const imgRegex = /(.jpg|.png)(?=\s*\(.+\))/gms;
+  const audioRegex = /.opus(?=\s*\(.+\))/gms;
+  const videoRegex = /.vcf(?=\s*\(.+\))/gms;
+  const contactRegex = /.vcf(?=\s*\(.+\))/gms;
+
+  const img = messageBody.match(imgRegex);
+  const audio = messageBody.match(audioRegex);
+  const video = messageBody.match(videoRegex);
+  const contact = messageBody.match(contactRegex);
+
+  return ([img, audio, video, contact].reduce((el) => el) || ['text'])[0];
 };
