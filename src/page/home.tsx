@@ -23,19 +23,52 @@ const Layout = styled.div`
 
 const cols = [
   {
-    title: 'Número de telefone',
+    title: 'Nome/Número de telefone',
     dataIndex: 'phone',
     key: 'phone',
-    width: '50%',
+    width: '30%',
   },
   {
-    title: 'Quantidade de mensagens',
+    title: 'Total',
     dataIndex: 'total',
     key: 'total',
-    width: '50%',
+    width: '14%',
     sorter: (a: any, b: any) => a.total - b.total,
     sortDirections: ['descend'],
   },
+  {
+    title: 'Texto',
+    dataIndex: 'text',
+    key: 'text',
+    width: '14%',
+    sorter: (a: any, b: any) => a.text - b.text,
+    sortDirections: ['descend'],
+  },
+  {
+    title: 'Audio',
+    dataIndex: 'audio',
+    key: 'audio',
+    width: '14%',
+    sorter: (a: any, b: any) => a.audio - b.audio,
+    sortDirections: ['descend'],
+  },
+  {
+    title: 'Imagem',
+    dataIndex: 'image',
+    key: 'image',
+    width: '14%',
+    sorter: (a: any, b: any) => a.image - b.image,
+    sortDirections: ['descend'],
+  },
+  {
+    title: 'Video',
+    dataIndex: 'video',
+    key: 'video',
+    width: '14%',
+    sorter: (a: any, b: any) => a.video - b.video,
+    sortDirections: ['descend'],
+  },
+
 ];
 
 const Home: React.FC = () => {

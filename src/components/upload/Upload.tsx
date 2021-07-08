@@ -4,7 +4,6 @@ import { UploadOutlined } from '@ant-design/icons';
 import { iUpload } from './Upload.interface';
 import styled from 'styled-components';
 import { RcFile } from 'antd/lib/upload';
-import { iMessage } from '../../types/global.interface';
 import { decode_text } from 'util/decode';
 
 const Layout = styled.div`
